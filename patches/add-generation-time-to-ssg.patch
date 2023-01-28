@@ -1,0 +1,25 @@
+diff --git a/src/Generator.php b/src/Generator.php
+index 9c96f3a..63a786b 100644
+--- a/src/Generator.php
++++ b/src/Generator.php
+@@ -275,7 +275,8 @@ class Generator
+
+                     $request->setPage($page);
+
+-                    Partyline::line("\x1B[1A\x1B[2KGenerating ".$page->url());
++                    $time_start = microtime(true);
++                    // Partyline::line("[{$count}] Generating ".$page->url());
+
+                     try {
+                         $generated = $page->generate($request);
+@@ -297,6 +298,10 @@ class Generator
+
+                         $warnings[] = $generated->consoleMessage();
+                     }
++
++                    $time_end = microtime(true);
++                    $time_total = round(($time_end - $time_start) * 1000);
++                    Partyline::line("[{$count}] Generate ".$page->url()."    ({$time_total}ms)");
+                 }
+
+                 return compact('count', 'warnings', 'errors');

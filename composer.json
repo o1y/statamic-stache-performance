@@ -10,12 +10,14 @@
     "type": "project",
     "require": {
         "php": "^8.0",
+        "cweagans/composer-patches": "^1.7",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
+        "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
-        "statamic/cms": "3.3.*",
-        "laravel/sanctum": "^2.14"
+        "statamic/cms": "^3.4",
+        "statamic/ssg": "^1.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -32,12 +34,18 @@
         "sort-packages": true,
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
-            "pixelfear/composer-dist-plugin": true
+            "pixelfear/composer-dist-plugin": true,
+            "cweagans/composer-patches": true
         }
     },
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "patches": {
+            "statamic/ssg": {
+                "Add generation time to ssg output": "patches/add-generation-time-to-ssg.patch"
+            }
         }
     },
     "autoload": {
